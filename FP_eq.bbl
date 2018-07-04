@@ -1,0 +1,79 @@
+% $ biblatex auxiliary file $
+% $ biblatex version 2.6 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\entry{perthame2015parabolic}{incollection}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Perthame}{P.}%
+     {Beno{\^\i}t}{B.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Springer}%
+  }
+  \strng{namehash}{PB1}
+  \strng{fullhash}{PB1}
+  \field{sortinit}{P}
+  \field{booktitle}{Parabolic Equations in Biology}
+  \field{pages}{1\bibrangedash 21}
+  \field{title}{Parabolic equations in biology}
+  \field{year}{2015}
+\endentry
+
+\entry{salsa2016equazioni}{book}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Salsa}{S.}%
+     {Sandro}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Springer}%
+  }
+  \strng{namehash}{SS1}
+  \strng{fullhash}{SS1}
+  \field{sortinit}{S}
+  \field{title}{Equazioni a derivate parziali: Metodi, modelli e applicazioni}
+  \field{volume}{98}
+  \field{year}{2016}
+\endentry
+
+\entry{tuckerman2010statistical}{book}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Tuckerman}{T.}%
+     {Mark}{M.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Oxford University Press}%
+  }
+  \strng{namehash}{TM1}
+  \strng{fullhash}{TM1}
+  \field{sortinit}{T}
+  \field{title}{Statistical mechanics: theory and molecular simulation}
+  \field{year}{2010}
+\endentry
+
+\lossort
+\endlossort
+
+\endinput
