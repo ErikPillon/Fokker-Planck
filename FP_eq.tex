@@ -34,14 +34,14 @@
 }
 
 % ------------- Geometry ---------------------------
-%\usepackage{geometry}
-%\geometry{
-%	a4paper,
-%	total={170mm,257mm},
-%	left=25mm,
-%	right=25mm,
-%	top=20mm,
-%}
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	total={170mm,257mm},
+	left=25mm,
+	right=25mm,
+	top=20mm,
+}
 % ------------- MATHEMATICAL ENVIRONMENTS ----------
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
@@ -286,6 +286,7 @@ which we may ‘center’ to follow the semi-implicit rule
 and because the dominant term in $ X^{k+1}-X^k $ is $ \sqrt{\Delta t}\sigma\left(\frac{X^k+X^{k+1}}{2}\right)Y^k $, we finally end up with
 \[u(X^{k+1})=u(X^k)+\Delta tDu(X^k)U(t^k,X^k)+\sqrt{\Delta t}Du\left(\frac{X^k+X^{k+1}}{2}\right)\sigma \left(\frac{X^k+X^{k+1}}{2}\right)Y^k+O(\Delta t^{3/2}), \]
 which is the discrete version of \eqref{eq:Stratonovich_formula}.
+
 \section{The Kolmogorov Equation}
 To go further and make the link with the Fokker-Planck equation, we recall the
 \begin{defn}
@@ -298,7 +299,35 @@ We give the probability density $ n^0(x) $ of $ X^0 $ and we denote by $ n(t,x) 
 \begin{thm}[Fokker-Planck-Kolmogorov Equation]
 	For the process \eqref{eq:num_approximation}, the 	limiting probability density $ n(t,x) $ satisfies the Fokker-Planck equation \eqref{eq:fokker-planck_eq}.
 \end{thm}
-
+\begin{proof}
+	We give two derivations. To see this from the SDE, we write, taking the expectation in \eqref{eq:Ito_Formula}, that for any smooth function $ u(t,x) $, we have 
+	\[\pd{}{t}\E{u(t,X(t))}=\E{\pd{u(t,X(t))}{t}+U(t,X(t))\cdot Du(t,X(t))+\frac{1}{2}B(t,X(t))\cdot D^2u(t,X(t))}. \]
+	Using the definition of the probability density $ n(t,x) $ of the process $ X(t) $, the former identity is also written
+	\[\pd{}{t}\int u(t,x)n(t,x)\diff x=\int\pd{u(t,x)}{t}n(t,x)\diff x+\int \left[U(t,x)\cdot Du(t,x)+\frac{1}{2}B(t,x)\cdot D^2 u(t,x) \right]n(t,x)\diff x. \]
+	The chain rule gives
+	\[\pd{}{t}\int u(t,x)n(t,x)\diff x=\int \pd{u(t,x)}{t}n(t,x)\diff x+\int u(t,x)\pd{n(t,x)}{t}\diff x, \]
+	and thus we define
+	\[0=-\int u(t,x)\pd{n(t,x)}{t}\diff x+\int \left[U(t,x)\cdot Du(t,x)+\frac{1}{2}B(t,x)\cdot D^2u(t,x) \right] n(t,x)\diff x, \]
+	and after integration by parts
+	\[0=\int u(t,x)\left[-\pd{n(t,x)}{t}-\div\left[U(t,x)\cdot n(t,x) \right]+D^2\left[\frac{1}{2}B(t,x)\cdot n(t,x) \right] \right]\diff x, \]
+	that is, the complete Fokker-Planck equation \eqref{eq:fokker-planck_eq}.
+	
+	We can give another derivation based on the Euler discrete scheme \eqref{eq:num_approximation} and write for all smooth functions $ u(x) $ that, still with $ N $ the normal law, we have 
+	\[u(X^{k+1})=u\left(X^k+\Delta tU(t^k,X^k)+\sqrt{\Delta t}\sigma(t^k,X^k)Y^k\right),\]
+	\[\int u(x)n^{k+1}(x)\diff x=\iint u(x+\Delta t U(t^k,x)+\sqrt{\Delta t}\sigma(t^k,x)y)n^k(x)N(y)\diff x\diff y.\]
+	We cannot obtain a simple equation for $ n^k $ from this formula but we can use again Taylor’s formula to obtain the approximation
+	\begin{align*}
+		\int u(x)n^{k+1}(x)\diff x &=\iint \Bigg[u(x)+\Delta tU(t^k,x)\cdot D u(x)+\sqrt{\Delta t}\sigma(t^k,x)y\cdot D u(x)\\
+		&+\frac{\Delta t}{2}\sigma(t^k,x)^2y^2\Bigg]n^k(x)N(y)\diff x\diff y+O(\Delta t^{3/2}),
+	\end{align*}
+	\begin{align*}
+	\int u(x)n^{k+1}(x)\diff x &=\int \left[u(x)+\Delta tU(t^k,x)\cdot D u(x)+\frac{\Delta t}{2}B(t^k,x)\right]n^k(x)\diff x+O(\Delta t^{3/2}) \\
+	&=\int u(x)\left[n^k(x)-\Delta t\div\left[U(t^k,x)n^k(x)\right]+\frac{\Delta t}{2}D^2\left[B(t^k,x)n^k(x) \right] \right]\diff x+O(\Delta t^{3/2}).
+	\end{align*}
+	Because this holds true for all smooth functions $ u $, it means that
+	\[n^{k+1}(x)=n^k(x)-\Delta t\div\left[U(t^k,x)n^k(x) \right]+\frac{\Delta t}{2}D^2\left[B(t^k,x)n^k(x) \right]+O(\Delta t^{3/2}). \]
+	As $ \Delta t $ vanishes, we recover the complete Fokker-Planck equation \eqref{eq:fokker-planck_eq}.
+\end{proof}
 
 
 \section{Numerical Implementations}
